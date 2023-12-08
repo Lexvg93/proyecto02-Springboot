@@ -1,5 +1,8 @@
 package com.tcna.gestioncursos.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tcna.gestioncursos.entity.Curso;
 import com.tcna.gestioncursos.repository.CursoRepository;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class CursoController {
@@ -49,5 +54,15 @@ public class CursoController {
         }
 
         return "redirect:/cursos";
+    }
+
+    @GetMapping("/export/pdf")
+    public void generarReportePdf(HttpServletResponse response){
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormat.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = ""
     }
 }
